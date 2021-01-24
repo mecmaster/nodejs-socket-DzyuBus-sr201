@@ -43,6 +43,22 @@
 //document.getElementById("BedroomFloorStair").style.opacity = 0.0;
 //document.getElementById("BedroomFloorMain").style.opacity = 0.0;
 //document.getElementById("BathroomFloor").style.opacity = 0.0;
+var socket = io.connect();
+socket.on('relay11', function(data){
+  if (data == true) {
+    var element = document.getElementById('LightsSalon1');
+    element.classList.toggle("lighton");
+  }
+  else {return}
+});
+
+socket.on('relay12', function(data){
+  if (data == true) {
+    var element = document.getElementById('LightsSalon2'); 
+    element.classList.toggle("lighton");
+  }
+  else {return}
+});
 
 
 // Lights Control
@@ -181,16 +197,7 @@ document.getElementById('MainHeaterButton').onclick = function() {
 
 
 
-var socket = io.connect();
-			 
-function buttonClicked(){
-  socket.emit('clicked');
-}
-  
-//when we receive buttonUpdate, do this
-socket.on('buttonUpdate', function(data){
-  document.getElementById("buttonCount").innerHTML = 'The button has been clicked ' + data + ' times.';
-});  
+
 
 
 

@@ -11,6 +11,10 @@ const relay2 = "192.168.80.101";
 const relay3 = "192.168.80.102";
 
 // relay states
+var relay1stat = [];
+var relay2stat = [];
+var relay3stat = [];
+
 var relay11 = new Boolean(false);
 var relay12 = new Boolean(false);
 var relay13 = new Boolean(false);
@@ -91,12 +95,35 @@ function relayonofftemplate(relayIPNum, relayNum) {
     });
 }
     
+
 function relaystatuscheck() {
     relay201.connect(relay1).then(async (client) => {
         await client.delay(500);
-        console.log('relay 100', await client.stat());
-        relay11 = client.status(1);
-        console.log('relay11', relay11);
+        if (relay1stat.toString() !== client.stat().toString()) {
+            console.log('old relay stat', relay1stat);
+            console.log("relay 1 changed");
+            console.log('new relay 100', await client.stat());
+            relay1stat = await client.stat();
+            console.log('new relay stat', relay1stat);
+            console.log('relay11 stat', relay1stat[0]);
+            relay11 = client.status(1);
+            io.emit('relay11', relay11);
+            relay12 = client.status(2);
+            io.emit('relay12', relay12);
+            relay13 = client.status(3);
+            io.emit('relay13', relay13);
+            relay14 = client.status(4);
+            io.emit('relay14', relay14);
+            relay15 = client.status(5);
+            io.emit('relay15', relay15);
+            relay16 = client.status(6);
+            io.emit('relay16', relay16);
+            relay17 = client.status(7);
+            io.emit('relay17', relay17);
+            relay18 = client.status(8);
+            io.emit('relay18', relay18);
+        } else {console.log("relay 1 same");}
+
         await client.end();
     }, (err) => {
     console.log('error relay 1 status');
@@ -104,9 +131,7 @@ function relaystatuscheck() {
 
     relay201.connect(relay2).then(async (client) => {
         await client.delay(500);
-        console.log('relay 101', await client.stat());
         relay28 = client.status(8);
-        console.log('relay28', relay28);
         await client.end();
     }, (err) => {
     console.log('error relay 2 status');
@@ -114,15 +139,14 @@ function relaystatuscheck() {
 
     relay201.connect(relay3).then(async (client) => {
         await client.delay(500);
-        console.log('relay 102', await client.stat());
         relay36 = client.status(6);
-        console.log('relay36', relay36);
-        return relay36;
         await client.end();
     }, (err) => {
     console.log('error relay 3 status');
     });
 }
+
+setInterval( relaystatuscheck, 3000); 
 
 function relaydemo(){
     setTimeout(() => {
