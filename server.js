@@ -241,7 +241,7 @@ function relaystatuscheck() {
     io.emit('relay123', tweet1);
 }
 
-setInterval( relaystatuscheck, 1000); 
+setInterval( relaystatuscheck, 1500); 
 
 function relaydemo(){
     setTimeout(() => {
