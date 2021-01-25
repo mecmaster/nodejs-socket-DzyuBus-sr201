@@ -52,10 +52,85 @@ app.get('/', function(req, res,next) {
 io.on('connection', function(client) { 
 	console.log('Client connected...'); 
 	//when the server receives clicked message, do this
-    client.on('clicked', function(data) {
-    	  clickCount++;
-		  //send a message to ALL connected clients
-		  io.emit('buttonUpdate', clickCount);
+    client.on('click11', function(data) {
+        relaychange(relay1, 1);
+		console.log("relay11 change start"); 
+    });
+    client.on('click12', function(data) {
+        relaychange(relay1, 2);
+		console.log("relay12 change start"); 
+    });
+    client.on('click13', function(data) {
+        relaychange(relay1, 3);
+		console.log("relay13 change start"); 
+    });
+    client.on('click14', function(data) {
+        relaychange(relay1, 4);
+		console.log("relay14 change start"); 
+    });
+    client.on('click15', function(data) {
+        relaychange(relay1, 5);
+		console.log("relay15 change start"); 
+    });
+    client.on('click16', function(data) {
+        relaychange(relay1, 6);
+		console.log("relay16 change start"); 
+    });
+    client.on('click17', function(data) {
+        relaychange(relay1, 7);
+		console.log("relay17 change start"); 
+    });
+    client.on('click18', function(data) {
+        relaychange(relay1, 8);
+		console.log("relay18 change start"); 
+    });
+    client.on('click19', function(data) {
+        relaychange(relay1, 9);
+		console.log("relay19 change start"); 
+    });
+    client.on('click21', function(data) {
+        relaychange(relay2, 1);
+		console.log("relay21 change start"); 
+    });
+    client.on('click22', function(data) {
+        relaychange(relay2, 2);
+		console.log("relay22 change start"); 
+    });
+    client.on('click23', function(data) {
+        relaychange(relay2, 3);
+		console.log("relay23 change start"); 
+    });
+    client.on('click24', function(data) {
+        relaychange(relay2, 4);
+		console.log("relay24 change start"); 
+    });
+    client.on('click25', function(data) {
+        relaychange(relay2, 5);
+		console.log("relay25 change start"); 
+    });
+    client.on('click26', function(data) {
+        relaychange(relay2, 6);
+		console.log("relay26 change start"); 
+    });
+    client.on('click27', function(data) {
+        relaychange(relay2, 7);
+		console.log("relay27 change start"); 
+    });
+    client.on('click28', function(data) {
+        relaychange(relay2, 8);
+		console.log("relay28 change start"); 
+    });
+    client.on('click31', function(data) {
+        relaychange(relay3, 1);
+		console.log("relay31 change start"); 
+    });
+    client.on('click32', function(data) {
+        relaychange(relay3, 2);
+		console.log("relay32 change start"); 
+    });
+    client.on('click33', function(data) {
+        relaychange(relay3, 3);
+		console.log("relay33 change start"); 
     });
 });
 
@@ -100,30 +175,20 @@ function relaystatuscheck() {
     relay201.connect(relay1).then(async (client) => {
         await client.delay(500);
         if (relay1stat.toString() !== client.stat().toString()) {
-            console.log('old relay stat', relay1stat);
+            console.log('old relay1 stat', relay1stat);
             console.log("relay 1 changed");
             console.log('new relay 100', await client.stat());
             relay1stat = await client.stat();
-            console.log('new relay stat', relay1stat);
-            console.log('relay11 stat', relay1stat[0]);
+            await client.delay(200);
             relay11 = client.status(1);
-            io.emit('relay11', relay11);
             relay12 = client.status(2);
-            io.emit('relay12', relay12);
             relay13 = client.status(3);
-            io.emit('relay13', relay13);
             relay14 = client.status(4);
-            io.emit('relay14', relay14);
             relay15 = client.status(5);
-            io.emit('relay15', relay15);
             relay16 = client.status(6);
-            io.emit('relay16', relay16);
             relay17 = client.status(7);
-            io.emit('relay17', relay17);
             relay18 = client.status(8);
-            io.emit('relay18', relay18);
         } else {console.log("relay 1 same");}
-
         await client.end();
     }, (err) => {
     console.log('error relay 1 status');
@@ -131,7 +196,21 @@ function relaystatuscheck() {
 
     relay201.connect(relay2).then(async (client) => {
         await client.delay(500);
-        relay28 = client.status(8);
+        if (relay2stat.toString() !== client.stat().toString()) {
+            console.log('old relay2 stat', relay2stat);
+            console.log("relay 2 changed");
+            console.log('new relay 101', await client.stat());
+            relay2stat = await client.stat();
+            await client.delay(200);
+            relay21 = client.status(1);
+            relay22 = client.status(2);
+            relay23 = client.status(3);
+            relay24 = client.status(4);
+            relay25 = client.status(5);
+            relay26 = client.status(6);
+            relay27 = client.status(7);
+            relay28 = client.status(8);
+        } else {console.log("relay 2 same");}
         await client.end();
     }, (err) => {
     console.log('error relay 2 status');
@@ -139,14 +218,30 @@ function relaystatuscheck() {
 
     relay201.connect(relay3).then(async (client) => {
         await client.delay(500);
-        relay36 = client.status(6);
+        if (relay3stat.toString() !== client.stat().toString()) {
+            console.log('old relay3 stat', relay1stat);
+            console.log("relay 3 changed");
+            console.log('new relay 102', await client.stat());
+            relay3stat = await client.stat();
+            await client.delay(200);
+            relay31 = client.status(1);
+            relay32 = client.status(2);
+            relay33 = client.status(3);
+            relay34 = client.status(4);
+            relay35 = client.status(5);
+            relay36 = client.status(6);
+            relay37 = client.status(7);
+            relay38 = client.status(8);
+        } else {console.log("relay 3 same");}
         await client.end();
     }, (err) => {
     console.log('error relay 3 status');
     });
+    var tweet1 = {relay11f: relay11, relay12f: relay12, relay13f: relay13, relay14f: relay14, relay15f: relay15, relay16f: relay16, relay17f: relay17, relay18f: relay18, relay21f: relay21, relay22f: relay22, relay23f: relay23, relay24f: relay24, relay25f: relay25, relay26f: relay26, relay27f: relay27, relay28f: relay28, relay31f: relay31, relay32f: relay32, relay33f: relay33, relay34f: relay34, relay35f: relay35, relay36f: relay36, relay37f: relay37, relay38f: relay38}
+    io.emit('relay123', tweet1);
 }
 
-setInterval( relaystatuscheck, 3000); 
+setInterval( relaystatuscheck, 1000); 
 
 function relaydemo(){
     setTimeout(() => {

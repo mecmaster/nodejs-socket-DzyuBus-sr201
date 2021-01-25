@@ -44,77 +44,179 @@
 //document.getElementById("BedroomFloorMain").style.opacity = 0.0;
 //document.getElementById("BathroomFloor").style.opacity = 0.0;
 var socket = io.connect();
-socket.on('relay11', function(data){
-  if (data == true) {
-    var element = document.getElementById('LightsSalon1');
-    element.classList.toggle("lighton");
-  }
-  else {return}
-});
 
-socket.on('relay12', function(data){
-  if (data == true) {
-    var element = document.getElementById('LightsSalon2'); 
-    element.classList.toggle("lighton");
+socket.on('relay123', function(tweet1){
+  console.log(tweet1);
+  console.log(tweet1.relay11f);
+  console.log(tweet1.relay12f);
+//relay1 
+    if (tweet1.relay11f == true) {
+    console.log("11 on");
+    var element = document.getElementById('LightsSalon1');
+    element.classList.add("lighton");
   }
-  else {return}
+  else {
+    console.log("11 off");
+    var element = document.getElementById('LightsSalon1');
+    element.classList.remove("lighton");
+  };
+//relay2 
+  if (tweet1.relay12f == true) {
+    console.log("12 on");
+    var element = document.getElementById('LightsSalon2');
+    element.classList.add("lighton");
+  }
+  else {
+    console.log("12 off");
+    var element = document.getElementById('LightsSalon2');
+    element.classList.remove("lighton");
+  };
+//relay3 
+  if (tweet1.relay13f == true) {
+    console.log("13 on");
+    var element = document.getElementById('LightsCoridor');
+    element.classList.add("lighton");
+  }
+  else {
+    console.log("13 off");
+    var element = document.getElementById('LightsCoridor');
+    element.classList.remove("lighton");
+  };
+//relay4 
+  if (tweet1.relay14f == true) {
+    console.log("14 on");
+    var element = document.getElementById('LightsBedroomMain');
+    element.classList.add("lighton");
+  }
+  else {
+    console.log("14 off");
+    var element = document.getElementById('LightsBedroomMain');
+    element.classList.remove("lighton");
+  };
+//relay5 
+  if (tweet1.relay15f == true) {
+    console.log("15 on");
+    var element = document.getElementById('LightsBedroom');
+    element.classList.add("lighton");
+  }
+  else {
+    console.log("15 off");
+    var element = document.getElementById('LightsBedroom');
+    element.classList.remove("lighton");
+  };
+//relay6 
+  if (tweet1.relay16f == true) {
+    console.log("16 on");
+    var element = document.getElementById('LightsBath');
+    element.classList.add("lighton");
+  }
+  else {
+    console.log("16 off");
+    var element = document.getElementById('LightsBath');
+    element.classList.remove("lighton");
+  };
+//relay7 
+  if (tweet1.relay17f == true) {
+    console.log("17 on");
+    var element = document.getElementById('LightsKitchen');
+    element.classList.add("lighton");
+  }
+  else {
+    console.log("17 off");
+    var element = document.getElementById('LightsKitchen');
+    element.classList.remove("lighton");
+  };
+//relay8 
+  if (tweet1.relay18f == true) {
+    console.log("18 on");
+    var element = document.getElementById('LightsLeftPassanger');
+    element.classList.add("lighton");
+  }
+  else {
+    console.log("18 off");
+    var element = document.getElementById('LightsLeftPassanger');
+    element.classList.remove("lighton");
+  };
+//relay21 
+  if (tweet1.relay21f == true) {
+    console.log("21 on");
+    var element = document.getElementById('LightsRightPassanger');
+    element.classList.add("lighton");
+  }
+  else {
+    console.log("21 off");
+    var element = document.getElementById('LightsRightPassanger');
+    element.classList.remove("lighton");
+  };
+//relay22 
+  if (tweet1.relay22f == true) {
+    console.log("22 on");
+    var element = document.getElementById('LightsNeon');
+    element.classList.add("lighton");
+  }
+  else {
+    console.log("22 off");
+    var element = document.getElementById('LightsNeon');
+    element.classList.remove("lighton");
+  };
+//relay23 
+  if (tweet1.relay23f == true) {
+    console.log("23 on");
+    var element = document.getElementById('LightsOutside');
+    element.classList.add("lighton");
+  }
+  else {
+    console.log("23 off");
+    var element = document.getElementById('LightsOutside');
+    element.classList.remove("lighton"); 
+  };
+
 });
 
 
 // Lights Control
 document.getElementById('LightsSalon1').onclick = function() {
-      var element = document.getElementById('LightsSalon1');
-      element.classList.toggle("lighton");
+    socket.emit('click11');
   };
 
 document.getElementById('LightsSalon2').onclick = function() {
-      var element = document.getElementById('LightsSalon2');
-      element.classList.toggle("lighton");
+    socket.emit('click12');
   };
 
 document.getElementById('LightsCoridor').onclick = function() {
-      var element = document.getElementById('LightsCoridor');
-      element.classList.toggle("lighton");
+  socket.emit('click13');
   };  
 
 document.getElementById('LightsBedroomMain').onclick = function() {
-      var element = document.getElementById('LightsBedroomMain');
-      element.classList.toggle("lighton");
+  socket.emit('click14');
   };
 
 document.getElementById('LightsBedroom').onclick = function() {
-      var element = document.getElementById('LightsBedroom');
-      element.classList.toggle("lighton");
+  socket.emit('click15');
   };
 
 document.getElementById('LightsBath').onclick = function() {
-      var element = document.getElementById('LightsBath');
-      element.classList.toggle("lighton");
+  socket.emit('click16');
   };
 
 document.getElementById('LightsKitchen').onclick = function() {
-      var element = document.getElementById('LightsKitchen');
-      element.classList.toggle("lighton");
+  socket.emit('click17');
   };
 
 document.getElementById('LightsLeftPassanger').onclick = function() {
-      var element = document.getElementById('LightsLeftPassanger');
-      element.classList.toggle("lighton");
+  socket.emit('click18');
   };
 
 document.getElementById('LightsRightPassanger').onclick = function() {
-      var element = document.getElementById('LightsRightPassanger');
-      element.classList.toggle("lighton");
+  socket.emit('click21');
   };
 
 document.getElementById('LightsNeon').onclick = function() {
-      var element = document.getElementById('LightsNeon');
-      element.classList.toggle("lighton");
+  socket.emit('click22');
   };
 
 document.getElementById('LightsOutside').onclick = function() {
-      var element = document.getElementById('LightsOutside');
-      element.classList.toggle("lighton");
+  socket.emit('click23');
   };
 
 // Control Buttons
