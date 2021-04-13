@@ -12,6 +12,7 @@ class Host extends EventEmitter {
 
 		socket.on("connect", () => {
 			this._socket.write("00");
+			console.log('SOCKET Connect');
 		});
 
 		socket.on("data", (buffer) => {
@@ -29,11 +30,18 @@ class Host extends EventEmitter {
 
 		socket.on("end", () => {
 			this.emit("end");
+			console.log('SOCKET END');
 		});
 
-		socket.on("error", () => {
-			this.emit("error");
-		});
+		socket.on('error', console.error);
+
+
+//		socket.on("error", () => {
+//			this.emit("error");
+//test error
+//			console.log('SOCKET ERROR');
+  //			socket.destroy();
+//		});
 	}
 
 	status(index) {
